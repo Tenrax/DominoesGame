@@ -17,7 +17,7 @@ public class Domino {
     public Domino (){
         createSet();
     }
-    
+    //creates all the pieces for the domino game
     public ArrayList createSet(){
         int[][] createSet = new int[7][];
         for(int i = 0; i < createSet.length; i++){
@@ -39,14 +39,14 @@ public class Domino {
         
         return set;
     }
-    //goes through the array till it finds a domino that remains
+    //removes the domino from the set when player passes
     public static String getDomino(int number){
         String picked = set.get(number);
         set.remove(number);
         //System.out.print(picked + " ");
         return picked;
     }
-    
+    //returns the entire set of dominos
     public static ArrayList getSet(){
         return set;
     }

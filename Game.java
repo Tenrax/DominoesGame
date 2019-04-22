@@ -13,16 +13,24 @@ public class Game {
     public static void main(String[] args) {
         
         Scanner input = new Scanner(System.in);
-        
+        //creates the domino object
         Domino domino = new Domino();
+        //creates the random object
         RandomNumber random = new RandomNumber(dominoPieces);
+        //creates player1 and player2 objects
         Player player1 = new Player(domino, random);
         Player player2 = new Player(domino, random);
+        //creates the table object
         Table table = new Table();
+        
+        //after both players have their hands, 8 dominos remain
         dominoPieces = 8;
         
+        //the turn number to determine what player can go.
         int turn = 1;
         System.out.println();
+        
+        //Player1 starts the game by placing a piece to start
         System.out.println("Player 1: place a piece to start the game");
         System.out.println(player1.printHand());
         int start = input.nextInt();
@@ -34,9 +42,13 @@ public class Game {
         table.placeFirst(firstPiece);
         turn++;
         
+        //booleans if players have pieces to play
         boolean playerOnePieces = true;
         boolean playerTwoPieces = true;
         
+        
+        //while loop the runs depending on the number of pieces the players
+        //have and if there are any dominos to be picked up remian
         while(canPlay && playerOnePieces && playerTwoPieces){
             
             if(player1.getDominoCount() <= 0){
@@ -64,11 +76,11 @@ public class Game {
                 turn++;
             }
         }
-        
+        //when the game has finished, the player who won is displayed
         winner(player1, player2);
         
     }
-    
+    //sends the player to the correct method depending on what choice they made
     public static void choice(Scanner input, Player player, Table table){
         //System.out.println("Getting");
         String choice = "";
@@ -86,7 +98,8 @@ public class Game {
         }
                 
     }
-    
+    //when the player takes the pass action, takes a piece from the remaining
+    //dominos and puts it into the players hand
     public static void pass(Player player){
         dominoPieces--;
         if(dominoPieces > 0){
@@ -98,7 +111,8 @@ public class Game {
             canPlay = false;
         }
     }
-    
+    //when the player takes the place action, asks for what domino and what side
+    //of the table
     public static void place(Scanner input, Player player, Table table){
         System.out.println("What domino: ");
         int domino = input.nextInt();
@@ -109,13 +123,15 @@ public class Game {
         String side = input.nextLine();
         table.placePiece(side, piece, player, domino);
     }
-    
+    //displays who the winner is and how many dominos that player has
     public static void winner(Player player1, Player player2){
         if(player1.getDominoCount() < player2.getDominoCount()){
             System.out.println("Player 1 is the Winner!");
+            System.out.println("With: " + player1.getDominoCount() + " pieces!");
         }
         else if(player1.getDominoCount() > player2.getDominoCount()){
             System.out.println("Player 2 is the Winner!");
+            System.out.println("With: " + player1.getDominoCount() + " pieces!");
         }
         else{
             System.out.println("It's a draw");

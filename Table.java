@@ -15,13 +15,13 @@ public class Table {
     public Table(){
         
     }
-    
+    //First piece to be placed at the start of the game
     public void placeFirst(String first){
         String[] placed = first.split("");
         openLeft = placed[0];
         openRight = placed[1];
     }
-    
+    //places a piece on the table and determinies if it is a legal move
     public void placePiece(String side, String piece, Player player, int domino){
         Boolean matchL;
         Boolean matchR;
@@ -29,7 +29,6 @@ public class Table {
         String[] played = piece.split("");
         
         if(side.toLowerCase().equals("left")){
-            System.out.println("getting to left");
             matchL = (played[0].equals(openLeft));
             matchR = (played[1].equals(openLeft));
             twin = (matchL && matchR);
@@ -50,7 +49,6 @@ public class Table {
             }
         }
         else if(side.toLowerCase().equals("right")){
-            System.out.println("getting to right");
             matchL = (played[0].equals(openRight));
             matchR = (played[1].equals(openRight));
             twin = (matchL && matchR);
@@ -72,7 +70,7 @@ public class Table {
         }
         
     }
-    
+    //if a piece is placed on the left side of the table, updates left side
     public void addLeft(String leftSide, String connectBy){
         String[] sides = leftSide.split("");
         if(sides[0].equals(connectBy) && sides[1].equals(connectBy)){
@@ -86,7 +84,7 @@ public class Table {
             }
         }
     }
-    
+    //if a piece is placed on the right side of the table, updates right side
     public void addRight(String rightSide, String connectBy){
         String[] sides = rightSide.split("");
         if(sides[0].equals(connectBy) && sides[1].equals(connectBy)){
@@ -100,15 +98,15 @@ public class Table {
             }
         }
     }
-    
+    //returns the open left domino
     public static String getLeft(){
         return openLeft;
     }
-    
+    //returns the open right domino
     public static String getRight(){
         return openRight;
     }
-    
+    //returns the printed ends to place a domino
     public static String openEnds(){
         String open = "";
         open += "Open spot left: " + getLeft() + "\nOpen spot right: " + getRight();
